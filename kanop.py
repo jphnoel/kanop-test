@@ -13,21 +13,18 @@ from flask_sqlalchemy import SQLAlchemy
 import folium
 
 KANOP_COORDS = (48.83505261412694, 2.37097587670811)
-EMAIL = "test@me.com"
-PASSWORD = "password"
+EMAIL = os.environ["EMAIL"]
+PASSWORD = os.environ["PASSWORD"]
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Generate a nice key using secrets.token_urlsafe()
-app.config["SECRET_KEY"] = os.environ.get(
-    "SECRET_KEY", "pf9Wkove4IKEAXvy-cQkeDPhv9Cb3Ag-wyJILbq_dFw"
-)
+app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+
 # Bcrypt is set as default SECURITY_PASSWORD_HASH, which requires a salt
 # Generate a good salt using: secrets.SystemRandom().getrandbits(128)
-app.config["SECURITY_PASSWORD_SALT"] = os.environ.get(
-    "SECURITY_PASSWORD_SALT", "146585145368132386173505678016728509634"
-)
+app.config["SECURITY_PASSWORD_SALT"] = os.environ["SECURITY_PASSWORD_SALT"]
 
 # Use an in-memory db
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
